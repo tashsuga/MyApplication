@@ -3,52 +3,111 @@ package com.takeshisugai.rccapp1
 
 import kotlinx.android.synthetic.main.activity_main.*
 
-/*
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
-
-import android.content.Context
-import android.net.ConnectivityManager
-import android.os.Bundle
-import android.text.Html
-import android.text.method.LinkMovementMethod
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-//import android.arch.lifecycle.LiveData
-//import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.LinearLayoutManager
-
-//import android.arc
-//import androidx.recyclerview.widget.LinearLayoutManager
-
-
-import com.google.android.material.snackbar.Snackbar
-
-import android.material.snackbar.Snackbar
-
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
-*/
-
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_main.*
+import android.content.Context
+
+import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
+
+import android.view.ViewGroup
+import android.widget.TextView
 
 
-import com.takeshisugai.*
+
+import android.net.ConnectivityManager
+
+/*
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+
+import android.arch.lifecycle.Observer
+
+import androidx.lifecycle.ViewModelProviders
+import android.arch.lifecycle.ViewModelProvider
 
 
+
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+
+// import android.support.v7.widget.RecyclerView.≈
+
+
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.content_main.*
+*/
+
+//class MainActivity : AppCompatActivity() {
+//
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        setContentView(R.layout.activity_main)
+//    }
+//}
+
+
+
+class MainActivity : AppCompatActivity() {
+
+
+   // private lateinit var adapter: ArticleAdapter
+   // private lateinit var viewModel: MainViewModel
+
+    private val isNetworkAvailable: Boolean
+        get() {
+            val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val activeNetworkInfo = connectivityManager.activeNetworkInfo
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected
+        }
+
+
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val data = listOf(
+            "Alice", "Bob", "Charlie", "Dave", "Eve", "Frank", "Grace", "Heidi", "Ivan", "Judy"
+        )
+
+
+
+
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = RecyclerAdapter(this, data)
+    }
+}
+
+class RecyclerAdapter(context: Context, val data: List<String>) : RecyclerView.Adapter<ViewHolder>() {
+    val inflater = LayoutInflater.from(context)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        // ここでViewHolderを作る
+        return ViewHolder(inflater.inflate(R.layout.list_item, parent, false))
+    }
+
+    override fun getItemCount(): Int {
+        // データの要素数を返す
+        return data.size
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        // ViewHolderを通してデータをViewに設定する
+        holder.textView.text = data[position]
+    }
+
+}
+
+class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    val textView: TextView = itemView.findViewById(R.id.textView)
+}
+
+/*
 class MainActivity : AppCompatActivity(), RecyclerViewHolder.ItemClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,10 +117,12 @@ class MainActivity : AppCompatActivity(), RecyclerViewHolder.ItemClickListener {
         //val hoges: MutableList<String>
         // hoges = resources.getStringArray(arrayOf(R).hoges).toMutableList()
 
+        //val hoges = resources.getStringArray(R.array.hoges).toMutableList()
+
         val hoges = resources.getStringArray(R.array.hoges).toMutableList()
 
         // Kotlin Android Extensionsを使っているので、つけたIDで直接指定できる（R.id.mainRecyclerView）
-        mainRecyclerView.adapter = RecyclerAdapter(this, this, hoges)
+        // mainRecyclerView.adapter = RecyclerAdapter(this, this, hoges)
         mainRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
     }
@@ -72,7 +133,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewHolder.ItemClickListener {
 }
 
 
-/*
+
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 
