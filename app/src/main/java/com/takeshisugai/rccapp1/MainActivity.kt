@@ -1,5 +1,9 @@
 package com.takeshisugai.rccapp1
 
+
+import kotlinx.android.synthetic.main.activity_main.*
+
+/*
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 
@@ -14,24 +18,104 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+//import android.arch.lifecycle.LiveData
+//import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.ViewModel
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+
+//import android.arc
+//import androidx.recyclerview.widget.LinearLayoutManager
+
+
 import com.google.android.material.snackbar.Snackbar
+
+import android.material.snackbar.Snackbar
+
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+*/
+
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.view.View
+import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.*
 
 
-/*
-class MainActivity : AppCompatActivity() {
+import com.takeshisugai.*
+
+
+class MainActivity : AppCompatActivity(), RecyclerViewHolder.ItemClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val hoges: MutableList<String>
+        hoges = resources.getStringArray(arrayOf(R).hoges).toMutableList()
+
+        // val hoges = resources.getStringArray(R.array.hoges).toMutableList()
+
+        // Kotlin Android Extensionsを使っているので、つけたIDで直接指定できる（R.id.mainRecyclerView）
+        mainRecyclerView.adapter = RecyclerAdapter(this, this, hoges)
+        mainRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+    }
+
+    override fun onItemClick(view: View, position: Int) {
+        Toast.makeText(applicationContext, "position $position was tapped", Toast.LENGTH_SHORT).show()
     }
 }
-*/
+
+
+/*
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+
+import android.content.Context
+import android.net.ConnectivityManager
+import android.os.Bundle
+import android.text.Html
+import android.text.method.LinkMovementMethod
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+//import android.arch.lifecycle.LiveData
+//import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.ViewModel
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+
+//import android.arc
+//import androidx.recyclerview.widget.LinearLayoutManager
+
+
+import com.google.android.material.snackbar.Snackbar
+
+import android.material.snackbar.Snackbar
+
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
+
+
+
+//class MainActivity : AppCompatActivity() {
+//
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        setContentView(R.layout.activity_main)
+//    }
+//}
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -130,3 +214,4 @@ class MainActivity : AppCompatActivity() {
 }
 
 
+*/
