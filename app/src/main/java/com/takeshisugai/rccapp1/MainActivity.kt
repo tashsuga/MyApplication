@@ -55,10 +55,10 @@ class MainActivity : AppCompatActivity(), RecyclerViewHolder.ItemClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val hoges: MutableList<String>
-        hoges = resources.getStringArray(arrayOf(R).hoges).toMutableList()
+        //val hoges: MutableList<String>
+        // hoges = resources.getStringArray(arrayOf(R).hoges).toMutableList()
 
-        // val hoges = resources.getStringArray(R.array.hoges).toMutableList()
+        val hoges = resources.getStringArray(R.array.hoges).toMutableList()
 
         // Kotlin Android Extensionsを使っているので、つけたIDで直接指定できる（R.id.mainRecyclerView）
         mainRecyclerView.adapter = RecyclerAdapter(this, this, hoges)
