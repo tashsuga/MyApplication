@@ -120,9 +120,9 @@ class MainActivity : AppCompatActivity() {
 
         //setSupportActionBar(toolbar)
 
-
-        val layoutManager = LinearLayoutManager(this)
-        val layoutAnimator = DefaultItemAnimator()
+        // 18th/Feb
+        //val layoutManager = LinearLayoutManager(this)
+        // val layoutAnimator = DefaultItemAnimator()
 
         //recycler_view.layoutManager = LinearLayoutManager(this)
         //recycler_view.itemAnimator = DefaultItemAnimator()

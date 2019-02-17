@@ -42,6 +42,9 @@ import java.util.*
 // added 16th/Feb
 import android.support.v7.widget.RecyclerView
 
+//import android.support.v7.widget.RecyclerView
+
+
 class ArticleAdapter(val articles: MutableList<Article>) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row, parent, false))
 
@@ -106,16 +109,20 @@ class ArticleAdapter(val articles: MutableList<Article>) : RecyclerView.Adapter<
 
 
 
+                /*
                 val alertDialog = androidx.appcompat.app.AlertDialog.Builder(itemView.context).create()
+                // val alertDialog = this.app.AlertDialog.Builder(itemView.context).create()
+
                 alertDialog.setTitle(article.title)
                 alertDialog.setView(articleView)
                 alertDialog.setButton(androidx.appcompat.app.AlertDialog.BUTTON_NEUTRAL, "OK"
                 ) { dialog, _ -> dialog.dismiss() }
                 alertDialog.show()
+                */
 
+              // (alertDialog.findViewById<View>(android.R.id.message) as TextView).movementMethod = LinkMovementMethod.getInstance()
+                //(.findViewById<View>(android.R.id.message) as TextView).movementMethod = LinkMovementMethod.getInstance()
 
-
-               // (alertDialog.findViewById<View>(android.R.id.message) as TextView).movementMethod = LinkMovementMethod.getInstance()
             }
         }
     }
