@@ -27,8 +27,6 @@ buildscript {
 
 
 
-
-
         // compile "com.prof.rssparser:rssparser:2.0.3"
 
 

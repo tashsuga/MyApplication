@@ -69,10 +69,13 @@ class ArticleAdapter(val articles: MutableList<Article>) : RecyclerView.Adapter<
 
             itemView.title.text = article.title
 
+            /*
             Picasso.get()
                 .load(article.image)
-                .placeholder(R.drawable.placeholder)
+                //.placeholder(R.drawable.placeholder)
                 .into(itemView.image)
+            */
+
 
             itemView.pubDate.text = pubDateString
 
@@ -100,14 +103,18 @@ class ArticleAdapter(val articles: MutableList<Article>) : RecyclerView.Adapter<
 
                         "</style>\n" + "<style>iframe{ height: auto; width: auto;}" + "</style>\n" + article.content, null, "utf-8", null)
 
+                /*
                 val alertDialog = androidx.appcompat.app.AlertDialog.Builder(itemView.context).create()
                 alertDialog.setTitle(article.title)
                 alertDialog.setView(articleView)
                 alertDialog.setButton(androidx.appcompat.app.AlertDialog.BUTTON_NEUTRAL, "OK"
                 ) { dialog, _ -> dialog.dismiss() }
                 alertDialog.show()
+                */
 
-                (alertDialog.findViewById<View>(android.R.id.message) as TextView).movementMethod = LinkMovementMethod.getInstance()
+
+
+               // (alertDialog.findViewById<View>(android.R.id.message) as TextView).movementMethod = LinkMovementMethod.getInstance()
             }
         }
     }
