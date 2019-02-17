@@ -19,6 +19,37 @@ import android.widget.TextView
 
 import android.net.ConnectivityManager
 
+
+import com.prof.rssparser.Article;
+import com.prof.rssparser.Parser;
+
+/*
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+*/
+//import androidx.lifecycle.Observer
+import android.arch.lifecycle.Observer
+//import androidx.lifecycle.ViewModelProviders
+import android.arch.lifecycle.ViewModelProviders
+
+//import android.arch.lifecycle.ViewModelProvider
+
+
+//import androidx.recyclerview.widget.DefaultItemAnimator
+//import androidx.recyclerview.widget.DefaultItemAnimator
+import android.support.v7.widget.DefaultItemAnimator
+
+
+//import androidx.recyclerview.widget.LinearLayoutManager
+//import android.support.v7.widget.LinearLayoutManager
+
+//import com.google.android.material.snackbar.Snackbar
+
+/*
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
+*/
+
 /*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -55,7 +86,7 @@ class MainActivity : AppCompatActivity() {
 
 
    // private lateinit var adapter: ArticleAdapter
-   // private lateinit var viewModel: MainViewModel
+   private lateinit var viewModel: MainViewModel
 
     private val isNetworkAvailable: Boolean
         get() {
@@ -71,16 +102,63 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val data = listOf(
-            "Alice", "Bob", "Charlie", "Dave", "Eve", "Frank", "Grace", "Heidi", "Ivan", "Judy"
+
+        /*
+        val urlString:String = "http://www.androidcentral.com/feed"
+        val parser:Parser = Parser()
+        parser.execute(urlString);
+        */
+
+
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+         viewModel = ViewModelProviders.of(this@MainActivity).get(MainViewModel::class.java)
+
+        //viewModel = listOf(ViewModelProvider).get(MainViewModel::class.java)
+        //of(this@MainActivity).get(MainViewModel::class.java)
+
+        //setSupportActionBar(toolbar)
+
+
+        val layoutManager = LinearLayoutManager(this)
+        val layoutAnimator = DefaultItemAnimator()
+
+        //recycler_view.layoutManager = LinearLayoutManager(this)
+        //recycler_view.itemAnimator = DefaultItemAnimator()
+       // recycler_view.setHasFixedSize(true)
+
+        viewModel.getArticleList().observe(this, Observer { articles ->
+
+            if (articles != null) {
+                val adapter = ArticleAdapter(articles)
+                //adapter = adapter
+                adapter.notifyDataSetChanged()
+                 //これがいるかどうか不明。
+                //progressBar.visibility = View.GONE
+                //swipe_layout.isRefreshing = false
+            }
+
+        })
+
+
+        //var value: Any = parser.onFinish(Parser.OnTaskCompleted() {
+       //
+        //}
+            /*
+            val data = listOf (
+                "Alice", "Bob", "Charlie", "Dave", "Eve", "Frank", "Grace", "Heidi", "Ivan", "Judy"
         )
-
-
 
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = RecyclerAdapter(this, data)
+
+        */
     }
+
+
+
 }
 
 class RecyclerAdapter(context: Context, val data: List<String>) : RecyclerView.Adapter<ViewHolder>() {
