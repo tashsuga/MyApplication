@@ -85,7 +85,7 @@ import kotlinx.android.synthetic.main.content_main.*
 class MainActivity : AppCompatActivity() {
 
 
-   // private lateinit var adapter: ArticleAdapter
+   private lateinit var adapter: ArticleAdapter
    private lateinit var viewModel: MainViewModel
 
     private val isNetworkAvailable: Boolean

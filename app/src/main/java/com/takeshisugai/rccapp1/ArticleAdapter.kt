@@ -69,12 +69,12 @@ class ArticleAdapter(val articles: MutableList<Article>) : RecyclerView.Adapter<
 
             itemView.title.text = article.title
 
-            /*
+
             Picasso.get()
                 .load(article.image)
-                //.placeholder(R.drawable.placeholder)
+                .placeholder(R.drawable.placeholder)
                 .into(itemView.image)
-            */
+
 
 
             itemView.pubDate.text = pubDateString
