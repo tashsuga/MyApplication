@@ -109,7 +109,7 @@ class ArticleAdapter(val articles: MutableList<Article>) : RecyclerView.Adapter<
 
 
 
-                /*
+
                 val alertDialog = androidx.appcompat.app.AlertDialog.Builder(itemView.context).create()
                 // val alertDialog = this.app.AlertDialog.Builder(itemView.context).create()
 
@@ -118,7 +118,7 @@ class ArticleAdapter(val articles: MutableList<Article>) : RecyclerView.Adapter<
                 alertDialog.setButton(androidx.appcompat.app.AlertDialog.BUTTON_NEUTRAL, "OK"
                 ) { dialog, _ -> dialog.dismiss() }
                 alertDialog.show()
-                */
+
 
               // (alertDialog.findViewById<View>(android.R.id.message) as TextView).movementMethod = LinkMovementMethod.getInstance()
                 //(.findViewById<View>(android.R.id.message) as TextView).movementMethod = LinkMovementMethod.getInstance()

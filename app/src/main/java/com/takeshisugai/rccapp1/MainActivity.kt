@@ -99,7 +99,8 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        // deleted by 18th/Feb.
+        // super.onCreate(savedInstanceState)
 
         // deleted by 18th/Feb.
         // setContentView(R.layout.activity_main)
