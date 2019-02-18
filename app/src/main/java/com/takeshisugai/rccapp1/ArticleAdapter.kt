@@ -40,7 +40,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 // added 16th/Feb
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 
 //import android.support.v7.widget.RecyclerView
 
