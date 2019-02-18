@@ -100,7 +100,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        // deleted by 18th/Feb.
+        // setContentView(R.layout.activity_main)
 
 
         /*
