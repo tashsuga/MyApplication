@@ -51,7 +51,11 @@ import kotlinx.android.synthetic.main.content_main.*
 
 import com.google.android.material.snackbar.Snackbar
 
+import android.view.Menu
+import android.view.MenuItem
+
 import android.view.KeyCharacterMap
+
 /*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
