@@ -49,7 +49,9 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
+import com.google.android.material.snackbar.Snackbar
 
+import android.view.KeyCharacterMap
 /*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -85,8 +87,8 @@ import kotlinx.android.synthetic.main.content_main.*
 class MainActivity : AppCompatActivity() {
 
 
-   private lateinit var adapter: ArticleAdapter
-   private lateinit var viewModel: MainViewModel
+    private lateinit var adapter: ArticleAdapter
+    private lateinit var viewModel: MainViewModel
 
     private val isNetworkAvailable: Boolean
         get() {
@@ -94,8 +96,6 @@ class MainActivity : AppCompatActivity() {
             val activeNetworkInfo = connectivityManager.activeNetworkInfo
             return activeNetworkInfo != null && activeNetworkInfo.isConnected
         }
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-         viewModel = ViewModelProviders.of(this@MainActivity).get(MainViewModel::class.java)
+        viewModel = ViewModelProviders.of(this@MainActivity).get(MainViewModel::class.java)
 
         //viewModel = listOf(ViewModelProvider).get(MainViewModel::class.java)
         //of(this@MainActivity).get(MainViewModel::class.java)
@@ -127,9 +127,9 @@ class MainActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         val layoutAnimator = DefaultItemAnimator()
 
-        //recycler_view.layoutManager = LinearLayoutManager(this)
-        //recycler_view.itemAnimator = DefaultItemAnimator()
-        //recycler_view.setHasFixedSize(true)
+        recycler_view.layoutManager = LinearLayoutManager(this)
+        recycler_view.itemAnimator = DefaultItemAnimator()
+        recycler_view.setHasFixedSize(true)
 
         viewModel.getArticleList().observe(this, Observer { articles ->
 
@@ -137,32 +137,103 @@ class MainActivity : AppCompatActivity() {
                 val adapter = ArticleAdapter(articles)
                 //adapter = adapter
                 adapter.notifyDataSetChanged()
-                 //これがいるかどうか不明。
-                //progressBar.visibility = View.GONE
-                //swipe_layout.isRefreshing = false
+                //これがいるかどうか不明。
+                progressBar.visibility = View.GONE
+                swipe_layout.isRefreshing = false
             }
 
         })
 
+        viewModel.snackbar.observe(this, Observer { value ->
+            value?.let {
+                Snackbar.make(root_layout, value, Snackbar.LENGTH_LONG).show()
+                viewModel.onSnackbarShowed()
+            }
 
-        //var value: Any = parser.onFinish(Parser.OnTaskCompleted() {
-       //
-        //}
-            /*
-            val data = listOf (
-                "Alice", "Bob", "Charlie", "Dave", "Eve", "Frank", "Grace", "Heidi", "Ivan", "Judy"
-        )
+        })
+
+        swipe_layout.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark)
+        swipe_layout.canChildScrollUp()
+        swipe_layout.setOnRefreshListener {
+            adapter.articles.clear()
+            adapter.notifyDataSetChanged()
+            swipe_layout.isRefreshing = true
+            viewModel.fetchFeed()
+        }
 
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = RecyclerAdapter(this, data)
+        if (!isNetworkAvailable) {
 
-        */
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage(R.string.alert_message)
+                .setTitle(R.string.alert_title)
+                .setCancelable(false)
+                .setPositiveButton(
+                    R.string.alert_positive
+                ) { dialog, id -> finish() }
+
+            val alert = builder.create()
+            alert.show()
+
+        } else if (isNetworkAvailable) {
+            viewModel.fetchFeed()
+        }
+
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
     }
 
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        val id = item.itemId
+
+        if (id == R.id.action_settings) {
+            val alertDialog = androidx.appcompat.app.AlertDialog.Builder(this@MainActivity).create()
+            alertDialog.setTitle(R.string.app_name)
+            alertDialog.setMessage(
+                Html.fromHtml(
+                    this@MainActivity.getString(R.string.info_text) +
+                            " <a href='http://github.com/prof18/RSS-Parser'>GitHub.</a>" +
+                            this@MainActivity.getString(R.string.author)
+                )
+            )
+            alertDialog.setButton(
+                androidx.appcompat.app.AlertDialog.BUTTON_NEUTRAL, "OK"
+            ) { dialog, which -> dialog.dismiss() }
+            alertDialog.show()
+
+            (alertDialog.findViewById<View>(android.R.id.message) as TextView).movementMethod =
+                LinkMovementMethod.getInstance()
+
+
+        }
+
+        return super.onOptionsItemSelected(item)
+
+
+        //var value: Any = parser.onFinish(Parser.OnTaskCompleted() {
+        //
+        //}
+        //
+        //val data = listOf (
+        //       "Alice", "Bob", "Charlie", "Dave", "Eve", "Frank", "Grace", "Heidi", "Ivan", "Judy"
+        // )
+        //
+        //
+        //  recyclerView.layoutManager = LinearLayoutManager(this)
+        //  recyclerView.adapter = RecyclerAdapter(this, data)
+
+
+    }
 
 }
+
+/*
 
 class RecyclerAdapter(context: Context, val data: List<String>) : RecyclerView.Adapter<ViewHolder>() {
     val inflater = LayoutInflater.from(context)
