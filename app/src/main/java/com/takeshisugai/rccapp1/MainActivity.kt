@@ -52,9 +52,12 @@ import kotlinx.android.synthetic.main.content_main.*
 
 import com.google.android.material.snackbar.Snackbar
 
+//19th/Feb.
 import android.view.Menu
 import android.view.MenuItem
 import android.app.AlertDialog
+import android.text.Html
+import android.text.method.LinkMovementMethod
 
 //import kotlinx
 
