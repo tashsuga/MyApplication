@@ -32,4 +32,6 @@
      <string name="info_text">This is a simple app that shows the use of RSS Parse library.
          &lt;br /&gt;&lt;br /&gt;You can find the source code on </string>
     <string name="author">&lt;br /&gt;&lt;br /&gt;Written by Marco Gomiero</string>
+
+  <!--  <string tools:ignore="ExtraTranslation" xmlns:tools="http://schemas.android.com/tools" name="" </string> -->
 </resources>
