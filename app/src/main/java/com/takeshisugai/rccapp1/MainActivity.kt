@@ -48,12 +48,15 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+//import kotlinx.android.synthetic.main.
 
 import com.google.android.material.snackbar.Snackbar
 
 import android.view.Menu
 import android.view.MenuItem
 import android.app.AlertDialog
+
+//import kotlinx
 
 import android.view.KeyCharacterMap
 
@@ -186,6 +189,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
