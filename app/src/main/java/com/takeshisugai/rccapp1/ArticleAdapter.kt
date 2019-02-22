@@ -135,6 +135,9 @@ class ArticleAdapter(val articles: MutableList<Article>) : RecyclerView.Adapter<
 
             }
         }
+
+
+
     }
 }
 

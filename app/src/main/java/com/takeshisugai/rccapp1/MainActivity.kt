@@ -1,27 +1,18 @@
 package com.takeshisugai.rccapp1
 
 
-import kotlinx.android.synthetic.main.activity_main.*
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import android.content.Context
 
-import androidx.recyclerview.widget.RecyclerView
-import android.view.LayoutInflater
-
-import android.view.ViewGroup
 import android.widget.TextView
 
 
 
 import android.net.ConnectivityManager
 
-
-import com.prof.rssparser.Article;
-import com.prof.rssparser.Parser;
 
 /*
 import androidx.appcompat.app.AlertDialog
@@ -46,7 +37,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 //import com.google.android.material.snackbar.Snackbar
 
 
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 //import kotlinx.android.synthetic.main.
 
@@ -56,12 +46,11 @@ import com.google.android.material.snackbar.Snackbar
 import android.view.Menu
 import android.view.MenuItem
 import android.app.AlertDialog
-import android.text.Html
+import android.content.Intent
 import android.text.method.LinkMovementMethod
 
 //import kotlinx
-
-import android.view.KeyCharacterMap
+import android.support.design.widget.FloatingActionButton;
 
 /*
 import androidx.appcompat.app.AlertDialog
@@ -98,6 +87,10 @@ import kotlinx.android.synthetic.main.content_main.*
 class MainActivity : AppCompatActivity() {
 
 
+    // 22th / Fev
+
+    private var mGenre = 0
+
     private lateinit var adapter: ArticleAdapter
     private lateinit var viewModel: MainViewModel
 
@@ -129,6 +122,31 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProviders.of(this@MainActivity).get(MainViewModel::class.java)
 
+        ///////
+
+
+        val fab = findViewById<FloatingActionButton>(R.id.fab)
+        fab.setOnClickListener { view ->
+            // ジャンルを選択していない場合（mGenre == 0）はエラーを表示するだけ
+            if (mGenre == 0) {
+                Snackbar.make(view, "ジャンルを選択して下さい", Snackbar.LENGTH_LONG).show()
+            } else {
+
+            }
+            // ログイン済みのユーザーを取得する
+            //val user = FirebaseAuth.getInstance().currentUser
+
+
+        }
+
+
+
+
+
+
+
+
+        /////////
         //viewModel = listOf(ViewModelProvider).get(MainViewModel::class.java)
         //of(this@MainActivity).get(MainViewModel::class.java)
 
@@ -255,9 +273,66 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+}
+    /*
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        mToolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(mToolbar)
+
+        val fab = findViewById<FloatingActionButton>(R.id.fab)
+        fab.setOnClickListener { view ->
+            // ジャンルを選択していない場合（mGenre == 0）はエラーを表示するだけ
+            if (mGenre == 0) {
+                Snackbar.make(view, "ジャンルを選択して下さい", Snackbar.LENGTH_LONG).show()
+            } else {
+
+            }
+            // ログイン済みのユーザーを取得する
+            val user = FirebaseAuth.getInstance().currentUser
+
+            if (user == null) {
+                // ログインしていなければログイン画面に遷移させる
+                val intent = Intent(applicationContext, LoginActivity::class.java)
+                startActivity(intent)
+            } else {
+                // ジャンルを渡して質問作成画面を起動する
+                val intent = Intent(applicationContext, QuestionSendActivity::class.java)
+                intent.putExtra("genre", mGenre)
+                startActivity(intent)
+            }
+        }
+
+        // ナビゲーションドロワーの設定
+        val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
+        val toggle = ActionBarDrawerToggle(this, drawer, mToolbar, R.string.app_name, R.string.app_name)
+        drawer.addDrawerListener(toggle)
+        toggle.syncState()
+
+        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener(this)
+
+        // Firebase
+        mDatabaseReference = FirebaseDatabase.getInstance().reference
+
+        // ListViewの準備
+        mListView = findViewById(R.id.listView)
+        mAdapter = QuestionsListAdapter(this)
+        mQuestionArrayList = ArrayList<Question>()
+        mAdapter.notifyDataSetChanged()
+
+        mListView.setOnItemClickListener { parent, view, position, id ->
+            // Questionのインスタンスを渡して質問詳細画面を起動する
+            val intent = Intent(applicationContext, QuestionDetailActivity::class.java)
+            intent.putExtra("question", mQuestionArrayList[position])
+            startActivity(intent)
+        }
+    }
+
 
 }
-
+*/
 /*
 
 class RecyclerAdapter(context: Context, val data: List<String>) : RecyclerView.Adapter<ViewHolder>() {
