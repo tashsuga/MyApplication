@@ -50,7 +50,7 @@ import android.content.Intent
 import android.text.method.LinkMovementMethod
 
 //import kotlinx
-import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.FloatingActionButton
 
 /*
 import androidx.appcompat.app.AlertDialog
