@@ -146,6 +146,7 @@ class MainActivity : AppCompatActivity() {
 
             if (articles != null) {
                 val adapter = ArticleAdapter(articles)
+                recycler_view.adapter = adapter
                 //adapter = adapter
                 adapter.notifyDataSetChanged()
                 //これがいるかどうか不明。
@@ -206,6 +207,8 @@ class MainActivity : AppCompatActivity() {
 
         if (id == R.id.action_settings) {
             val alertDialog = androidx.appcompat.app.AlertDialog.Builder(this@MainActivity).create()
+
+            /*
             alertDialog.setTitle(R.string.app_name)
             alertDialog.setMessage(
                 Html.fromHtml(
@@ -214,6 +217,16 @@ class MainActivity : AppCompatActivity() {
                             this@MainActivity.getString(R.string.author)
                 )
             )
+            */
+            alertDialog.setTitle("RSS Reader")
+            alertDialog.setMessage(
+                // "Takeshi Sugai App "
+                // "Takeshi Sugai App¥n2019年2月20日"
+                "Takeshi Sugai App\n\n2019年2月20日"
+            )
+            //alertDialog.setMessage(
+            //    "2019年2月20日"
+            //)
             alertDialog.setButton(
                 androidx.appcompat.app.AlertDialog.BUTTON_NEUTRAL, "OK"
             ) { dialog, which -> dialog.dismiss() }
